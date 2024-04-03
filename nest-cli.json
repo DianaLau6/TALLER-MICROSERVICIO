@@ -1,0 +1,32 @@
+{
+  "$schema": "https://json.schemastore.org/nest-cli",
+  "collection": "@nestjs/schematics",
+  "sourceRoot": "apps/moonlight/src",
+  "compilerOptions": {
+    "deleteOutDir": true,
+    "webpack": true,
+    "tsConfigPath": "apps/moonlight/tsconfig.app.json"
+  },
+  "monorepo": true,
+  "root": "apps/moonlight",
+  "projects": {
+    "moonlight": {
+      "type": "application",
+      "root": "apps/moonlight",
+      "entryFile": "main",
+      "sourceRoot": "apps/moonlight/src",
+      "compilerOptions": {
+        "tsConfigPath": "apps/moonlight/tsconfig.app.json"
+      }
+    },
+    "moon_app": {
+      "type": "application",
+      "root": "apps/moon_app",
+      "entryFile": "main",
+      "sourceRoot": "apps/moon_app/src",
+      "compilerOptions": {
+        "tsConfigPath": "apps/moon_app/tsconfig.app.json"
+      }
+    }
+  }
+}
