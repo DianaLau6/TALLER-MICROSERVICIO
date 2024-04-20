@@ -1,19 +1,23 @@
-import { Controller, Get } from '@nestjs/common';
+import { Controller } from '@nestjs/common';
 import { MoonAppService } from './moon_app.service';
-import { EventPattern } from '@nestjs/microservices'
+import { EventPattern } from '@nestjs/microservices';
 
 @Controller()
 export class MoonAppController {
   constructor(private readonly moonAppService: MoonAppService) {}
 
- // @Get()
-  //getHello(): string {
-  //  return this.moonAppService.getHello();
-  //}
-
-  @EventPattern( 'new_correo' )
-    handleNewMail ( data: any ) {
-        console.log( 'Este es un nuevo correo ', data)
-        //TODO: Lógica relacionada a la creación de un nuevo mail
+  @EventPattern('new_correo')
+  async handleNewMail(data: any) {
+    try {
+      console.log('Este es un nuevo correo ', data);
+      
+      // Agregar los datos del correo a la base de datos utilizando el servicio
+      await this.moonAppService.addDataToDatabase(data);
+      
+      // Envía una respuesta o realiza otras operaciones según sea necesario
+    } catch (error) {
+      console.error('Error al manejar el nuevo correo:', error);
+      // Manejar errores
     }
+  }
 }
