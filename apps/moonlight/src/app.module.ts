@@ -6,8 +6,13 @@ import { AppService } from './app.service';
 @Module({
   imports: [
     ClientsModule.register( [
-      { name: 'MOON_SERVICE', transport: Transport.TCP }
-  ] )
+      { name: 'MOON_SERVICE', 
+        transport: Transport.REDIS,
+        options: {
+          host: 'localhost',
+          port: 6379,
+        }}
+      ] )
   ],
   controllers: [AppController],
   providers: [AppService],

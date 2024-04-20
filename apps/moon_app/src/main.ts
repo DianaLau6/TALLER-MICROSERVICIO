@@ -9,7 +9,11 @@ async function bootstrap () {
     const app = await NestFactory.createMicroservice<MicroserviceOptions>(
         MoonAppModule,
         {
-            transport: Transport.TCP
+            transport: Transport.REDIS,
+            options: {
+                host: 'localhost',
+                port: 6379,
+            },
         },
     )
 
