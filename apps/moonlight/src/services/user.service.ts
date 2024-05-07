@@ -11,8 +11,26 @@ export class UserService {
   ) {}
 
   async createUser(user: Partial<User>): Promise<User> {
-    return this.userRepository.save(user);
+    // Verificar que el nombre y el correo electrónico no estén en uso
+  const existingUser = await this.userRepository.findOne({ where: { Name: user.Name } });
+  const existingUserByEmail = await this.userRepository.findOne({ where: { Email: user.Email } });
+
+  if (existingUser) {
+    throw new Error('El nombre de usuario ya está en uso');
   }
+
+  if (existingUserByEmail) {
+    throw new Error('El correo electrónico ya está en uso');
+  }
+
+  // Validar el formato del correo electrónico
+  if (!isValidEmailFormat(user.Email)) {
+    throw new Error('Formato de correo electrónico inválido');
+  }
+
+  // Guardar el usuario en la base de datos si pasa las validaciones
+  return this.userRepository.save(user);
+}
 
   async getUsers(): Promise<User[]> {
     return this.userRepository.find();
@@ -44,4 +62,11 @@ export class UserService {
   async deleteUser(id: number): Promise<void> {
     await this.userRepository.delete(id);
   }
+
 }
+function isValidEmailFormat(email: string): boolean {
+  const emailRegex = /^[a-zA-Z]{3,}@([a-zA-Z]{1,10})\.([a-zA-Z]{1,6})$/;
+  return emailRegex.test(email);
+}
+
+

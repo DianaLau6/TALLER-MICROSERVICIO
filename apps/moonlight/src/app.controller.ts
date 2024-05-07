@@ -9,7 +9,7 @@ export class AppController {
         private readonly userService: UserService, 
     ) { }
 
-    @Post()
+    @Post('users')
     async newUser(@Body() body: any): Promise<any> {
         try {
             // Llama al servicio de usuario para crear un nuevo usuario en la base de datos
