@@ -5,20 +5,23 @@ body {
     align-items: center;
     height: 100vh;
     margin: 0;
-    background-color: rgb(136, 80, 169);
+    background-image: url("fondo.avif");
+    background-repeat: no-repeat;
+    background-size: cover;
 }
 
 .container {
     width: 400px;
-    background-color: #cb8a8a;
+    background-color: rgba(36, 142, 87, 0.1);
     padding: 20px;
     border-radius: 8px;
     box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    border: #0056b3 solid 2px;
 }
 
 button {
     padding: 10px 20px;
-    background-color: #007bff;
+    background-color: #5b2196;
     color: #fff;
     border: none;
     border-radius: 4px;
@@ -41,12 +44,13 @@ h2 {
   
   input {
     padding: 8px;
-    border: 1px solid #ccc;
+    border: 1px solid #8e4646;
     border-radius: 4px;
     margin-bottom: 16px;
+    background-color: transparent;
   }
   
 
 button:hover {
-    background-color: #0056b3;
+    background-color: #7e2078;
 }
